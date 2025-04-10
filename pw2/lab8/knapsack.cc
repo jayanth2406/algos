@@ -1,49 +1,42 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
-
+#include <bits/stdc++.h>
 using namespace std;
 
-struct Course {
-    int id, credit, benefit;
-    double ratio;
-};
+int n, b;
+int l[100], c[100];
+double ratio[100];
+int ans[100];
+int maxSum = 0;
 
-bool compare(Course a, Course b) {
-    return a.ratio > b.ratio;
-}
-
-void knapsack(int n, vector<int>& L, vector<int>& C, int b) {
-    vector<Course> courses;
-    for (int i = 0; i < n; i++) {
-        courses.push_back({i + 1, C[i], L[i], (double)L[i] / C[i]});
-    }
-    
-    sort(courses.begin(), courses.end(), compare);
-    
-    vector<int> selected(n, 0);
-    int totalBenefit = 0, totalCredits = 0;
-    
-    for (auto& course : courses) {
-        if (totalCredits + course.credit <= b) {
-            selected[course.id - 1] = 1;
-            totalCredits += course.credit;
-            totalBenefit += course.benefit;
+void solve(int i, int sum, int rem, int x[]) {
+    if (i == n) {
+        if (sum > maxSum) {
+            maxSum = sum;
+            for (int j = 0; j < n; j++) ans[j] = x[j];
         }
+        return;
     }
-    
-    cout << "Optimal Course Selection: ";
-    for (int i = 0; i < n; i++) {
-        if (selected[i]) cout << "x" << i + 1 << " = 1, ";
+
+    if (c[i] <= rem) {
+        x[i] = 1;
+        solve(i+1, sum + l[i], rem - c[i], x);
+        x[i] = 0;
     }
-    cout << "\nTotal Learning Benefit: " << totalBenefit << endl;
+    solve(i+1, sum, rem, x);
 }
 
 int main() {
-    int n = 4, b = 6;
-    vector<int> L = {85, 90, 80, 70};
-    vector<int> C = {3, 4, 2, 1};
-    
-    knapsack(n, L, C, b);
+    cin >> n;
+    for (int i = 0; i < n; i++) cin >> l[i];
+    for (int i = 0; i < n; i++) cin >> c[i];
+    cin >> b;
+
+    int x[100] = {0};
+    solve(0, 0, b, x);
+
+    cout << "Optimal Course Selection:\n";
+    for (int i = 0; i < n; i++)
+        if (ans[i]) cout << "x" << i+1 << " = 1\n";
+
+    cout << "Total Learning Benefit: " << maxSum << "\n";
     return 0;
 }
