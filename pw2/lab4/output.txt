@@ -1,3 +1,3 @@
-OptimalTour: 1 -> 3 -> 4 -> 2 -> 1
+OptimalTour: 1 -> 2 -> 4 -> 3 -> 1
 MinimumCost: 80
-Execution Time: 0.000000 seconds
+Execution Time: 0.001000 seconds
