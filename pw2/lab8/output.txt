@@ -1,0 +1,161 @@
+Case 1:
+Optimal Course Selection:
+x1 = 1
+x2 = 1
+x3 = 1
+x4 = 1
+x6 = 1
+x9 = 1
+Total Learning Benefit: 467
+
+Case 2:
+Optimal Course Selection:
+x1 = 1
+x2 = 1
+x3 = 1
+Total Learning Benefit: 266
+
+Case 3:
+Optimal Course Selection:
+x1 = 1
+x2 = 1
+x3 = 1
+x4 = 1
+x5 = 1
+Total Learning Benefit: 296
+
+Case 4:
+Optimal Course Selection:
+x4 = 1
+x5 = 1
+x7 = 1
+x8 = 1
+Total Learning Benefit: 256
+
+Case 5:
+Optimal Course Selection:
+x5 = 1
+x8 = 1
+Total Learning Benefit: 185
+
+Case 6:
+Optimal Course Selection:
+x1 = 1
+x2 = 1
+x3 = 1
+x5 = 1
+Total Learning Benefit: 271
+
+Case 7:
+Optimal Course Selection:
+x1 = 1
+x2 = 1
+x3 = 1
+x4 = 1
+x5 = 1
+Total Learning Benefit: 273
+
+Case 8:
+Optimal Course Selection:
+x1 = 1
+x3 = 1
+x4 = 1
+x5 = 1
+x6 = 1
+x7 = 1
+Total Learning Benefit: 518
+
+Case 9:
+Optimal Course Selection:
+x2 = 1
+x3 = 1
+x4 = 1
+x5 = 1
+x6 = 1
+x7 = 1
+Total Learning Benefit: 409
+
+Case 10:
+Optimal Course Selection:
+x1 = 1
+x2 = 1
+x3 = 1
+Total Learning Benefit: 221
+
+Case 11:
+Optimal Course Selection:
+x1 = 1
+x2 = 1
+x3 = 1
+Total Learning Benefit: 173
+
+Case 12:
+Optimal Course Selection:
+x2 = 1
+x3 = 1
+Total Learning Benefit: 109
+
+Case 13:
+Optimal Course Selection:
+x1 = 1
+x3 = 1
+x6 = 1
+x7 = 1
+x8 = 1
+Total Learning Benefit: 262
+
+Case 14:
+Optimal Course Selection:
+x1 = 1
+x2 = 1
+x3 = 1
+Total Learning Benefit: 180
+
+Case 15:
+Optimal Course Selection:
+x2 = 1
+x4 = 1
+x5 = 1
+x6 = 1
+Total Learning Benefit: 302
+
+Case 16:
+Optimal Course Selection:
+x1 = 1
+x2 = 1
+x3 = 1
+x4 = 1
+x5 = 1
+x7 = 1
+Total Learning Benefit: 430
+
+Case 17:
+Optimal Course Selection:
+x2 = 1
+x3 = 1
+Total Learning Benefit: 168
+
+Case 18:
+Optimal Course Selection:
+x1 = 1
+x2 = 1
+x3 = 1
+x4 = 1
+Total Learning Benefit: 275
+
+Case 19:
+Optimal Course Selection:
+x2 = 1
+x3 = 1
+x4 = 1
+Total Learning Benefit: 218
+
+Case 20:
+Optimal Course Selection:
+x1 = 1
+x2 = 1
+x6 = 1
+x7 = 1
+x8 = 1
+Total Learning Benefit: 300
+

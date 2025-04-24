@@ -3,40 +3,121 @@ using namespace std;
 
 int n, b;
 int l[100], c[100];
-double ratio[100];
 int ans[100];
 int maxSum = 0;
 
-void solve(int i, int sum, int rem, int x[]) {
-    if (i == n) {
-        if (sum > maxSum) {
-            maxSum = sum;
-            for (int j = 0; j < n; j++) ans[j] = x[j];
-        }
-        return;
-    }
+struct Node {
+    int level, benefit, credit;
+    double bound;
+    int x[100];
+};
 
-    if (c[i] <= rem) {
-        x[i] = 1;
-        solve(i+1, sum + l[i], rem - c[i], x);
-        x[i] = 0;
+bool cmpRatio(int i, int j) {
+    return (double)l[i]/c[i] > (double)l[j]/c[j];
+}
+
+double getBound(int level, int benefit, int credit, vector<int>& order) {
+    double bound = benefit;
+    int rem = b - credit;
+    for (int i = level; i < n && rem > 0; i++) {
+        int idx = order[i];
+        if (c[idx] <= rem) {
+            rem -= c[idx];
+            bound += l[idx];
+        } else {
+            bound += (double)l[idx] * rem / c[idx];
+            break;
+        }
     }
-    solve(i+1, sum, rem, x);
+    return bound;
+}
+
+void branchAndBound() {
+    vector<int> order(n);
+    for (int i = 0; i < n; i++) order[i] = i;
+    sort(order.begin(), order.end(), cmpRatio);
+
+    queue<Node> q;
+    Node root = {0, 0, 0, getBound(0, 0, 0, order)};
+    fill(root.x, root.x + n, 0);
+    q.push(root);
+
+    while (!q.empty()) {
+        Node u = q.front(); q.pop();
+        if (u.level == n || u.bound <= maxSum) continue;
+
+        int i = order[u.level];
+
+        // Include course
+        if (u.credit + c[i] <= b) {
+            Node v = u;
+            v.level++;
+            v.credit += c[i];
+            v.benefit += l[i];
+            v.x[i] = 1;
+            v.bound = getBound(v.level, v.benefit, v.credit, order);
+            if (v.benefit > maxSum) {
+                maxSum = v.benefit;
+                copy(v.x, v.x + n, ans);
+            }
+            if (v.bound > maxSum) q.push(v);
+        }
+
+        // Exclude course
+        Node w = u;
+        w.level++;
+        w.bound = getBound(w.level, w.benefit, w.credit, order);
+        q.push(w);
+    }
 }
 
 int main() {
-    cin >> n;
-    for (int i = 0; i < n; i++) cin >> l[i];
-    for (int i = 0; i < n; i++) cin >> c[i];
-    cin >> b;
+    ifstream fin("input.txt");
+    ofstream fout("output.txt");
 
-    int x[100] = {0};
-    solve(0, 0, b, x);
+    string line;
+    int caseNum = 0;
+    while (getline(fin, line)) {
+        if (line.find("Case") == string::npos) continue;
 
-    cout << "Optimal Course Selection:\n";
-    for (int i = 0; i < n; i++)
-        if (ans[i]) cout << "x" << i+1 << " = 1\n";
+        caseNum++;
+        // Read "n = X"
+        getline(fin, line);
+        sscanf(line.c_str(), "n = %d", &n);
 
-    cout << "Total Learning Benefit: " << maxSum << "\n";
+        // Read "L = [....]"
+        getline(fin, line);
+        size_t start = line.find('[') + 1;
+        size_t end = line.find(']');
+        string Lvalues = line.substr(start, end - start);
+        stringstream lss(Lvalues);
+        for (int i = 0; i < n; i++) lss >> l[i], lss.ignore(1); // skip comma
+
+        // Read "C = [....]"
+        getline(fin, line);
+        start = line.find('[') + 1;
+        end = line.find(']');
+        string Cvalues = line.substr(start, end - start);
+        stringstream css(Cvalues);
+        for (int i = 0; i < n; i++) css >> c[i], css.ignore(1); // skip comma
+
+        // Read "b = X"
+        getline(fin, line);
+        sscanf(line.c_str(), "b = %d", &b);
+
+        maxSum = 0;
+        fill(ans, ans + 100, 0);
+        branchAndBound();
+
+        fout << "Case " << caseNum << ":\n";
+        fout << "Optimal Course Selection:\n";
+        for (int i = 0; i < n; i++)
+            if (ans[i]) fout << "x" << i+1 << " = 1\n";
+        fout << "Total Learning Benefit: " << maxSum << "\n\n";
+    }
+
+    fin.close();
+    fout.close();
     return 0;
 }
+
