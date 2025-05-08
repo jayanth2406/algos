@@ -4,69 +4,67 @@ using namespace std;
 int n, b;
 int l[100], c[100];
 int ans[100];
-int maxSum = 0;
+int mx = 0;
 
 struct Node {
-    int level, benefit, credit;
-    double bound;
+    int lvl, ben, cred;
+    double bnd;
     int x[100];
 };
 
-bool cmpRatio(int i, int j) {
+bool cmp(int i, int j) {
     return (double)l[i]/c[i] > (double)l[j]/c[j];
 }
 
-double getBound(int level, int benefit, int credit, vector<int>& order) {
-    double bound = benefit;
-    int rem = b - credit;
-    for (int i = level; i < n && rem > 0; i++) {
-        int idx = order[i];
+double bnb(int lvl, int ben, int cred, vector<int>& ord) {
+    double bnd = ben;
+    int rem = b - cred;
+    for (int i = lvl; i < n && rem > 0; i++) {
+        int idx = ord[i];
         if (c[idx] <= rem) {
             rem -= c[idx];
-            bound += l[idx];
+            bnd += l[idx];
         } else {
-            bound += (double)l[idx] * rem / c[idx];
+            bnd += (double)l[idx] * rem / c[idx];
             break;
         }
     }
-    return bound;
+    return bnd;
 }
 
-void branchAndBound() {
-    vector<int> order(n);
-    for (int i = 0; i < n; i++) order[i] = i;
-    sort(order.begin(), order.end(), cmpRatio);
+void solve() {
+    vector<int> ord(n);
+    for (int i = 0; i < n; i++) ord[i] = i;
+    sort(ord.begin(), ord.end(), cmp);
 
     queue<Node> q;
-    Node root = {0, 0, 0, getBound(0, 0, 0, order)};
-    fill(root.x, root.x + n, 0);
-    q.push(root);
+    Node r = {0, 0, 0, bnb(0, 0, 0, ord)};
+    fill(r.x, r.x + n, 0);
+    q.push(r);
 
     while (!q.empty()) {
         Node u = q.front(); q.pop();
-        if (u.level == n || u.bound <= maxSum) continue;
+        if (u.lvl == n || u.bnd <= mx) continue;
 
-        int i = order[u.level];
+        int i = ord[u.lvl];
 
-        // Include course
-        if (u.credit + c[i] <= b) {
+        if (u.cred + c[i] <= b) {
             Node v = u;
-            v.level++;
-            v.credit += c[i];
-            v.benefit += l[i];
+            v.lvl++;
+            v.cred += c[i];
+            v.ben += l[i];
             v.x[i] = 1;
-            v.bound = getBound(v.level, v.benefit, v.credit, order);
-            if (v.benefit > maxSum) {
-                maxSum = v.benefit;
+            v.bnd = bnb(v.lvl, v.ben, v.cred, ord);
+            if (v.ben > mx) {
+                mx = v.ben;
                 copy(v.x, v.x + n, ans);
             }
-            if (v.bound > maxSum) q.push(v);
+            if (v.bnd > mx) q.push(v);
         }
 
-        // Exclude course
         Node w = u;
-        w.level++;
-        w.bound = getBound(w.level, w.benefit, w.credit, order);
+        w.lvl++;
+        w.bnd = bnb(w.lvl, w.ben, w.cred, ord);
         q.push(w);
     }
 }
@@ -75,49 +73,40 @@ int main() {
     ifstream fin("input.txt");
     ofstream fout("output.txt");
 
-    string line;
-    int caseNum = 0;
-    while (getline(fin, line)) {
-        if (line.find("Case") == string::npos) continue;
+    string s;
+    int cs = 0;
+    while (getline(fin, s)) {
+        if (s.find("Case") == string::npos) continue;
 
-        caseNum++;
-        // Read "n = X"
-        getline(fin, line);
-        sscanf(line.c_str(), "n = %d", &n);
+        cs++;
+        getline(fin, s);
+        sscanf(s.c_str(), "n = %d", &n);
 
-        // Read "L = [....]"
-        getline(fin, line);
-        size_t start = line.find('[') + 1;
-        size_t end = line.find(']');
-        string Lvalues = line.substr(start, end - start);
-        stringstream lss(Lvalues);
-        for (int i = 0; i < n; i++) lss >> l[i], lss.ignore(1); // skip comma
+        getline(fin, s);
+        size_t st = s.find('[') + 1, en = s.find(']');
+        stringstream sl(s.substr(st, en - st));
+        for (int i = 0; i < n; i++) sl >> l[i], sl.ignore(1);
 
-        // Read "C = [....]"
-        getline(fin, line);
-        start = line.find('[') + 1;
-        end = line.find(']');
-        string Cvalues = line.substr(start, end - start);
-        stringstream css(Cvalues);
-        for (int i = 0; i < n; i++) css >> c[i], css.ignore(1); // skip comma
+        getline(fin, s);
+        st = s.find('[') + 1, en = s.find(']');
+        stringstream sc(s.substr(st, en - st));
+        for (int i = 0; i < n; i++) sc >> c[i], sc.ignore(1);
 
-        // Read "b = X"
-        getline(fin, line);
-        sscanf(line.c_str(), "b = %d", &b);
+        getline(fin, s);
+        sscanf(s.c_str(), "b = %d", &b);
 
-        maxSum = 0;
+        mx = 0;
         fill(ans, ans + 100, 0);
-        branchAndBound();
+        solve();
 
-        fout << "Case " << caseNum << ":\n";
+        fout << "Case " << cs << ":\n";
         fout << "Optimal Course Selection:\n";
         for (int i = 0; i < n; i++)
             if (ans[i]) fout << "x" << i+1 << " = 1\n";
-        fout << "Total Learning Benefit: " << maxSum << "\n\n";
+        fout << "Total Learning Benefit: " << mx << "\n\n";
     }
 
     fin.close();
     fout.close();
     return 0;
 }
-

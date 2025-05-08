@@ -1,0 +1,183 @@
+# Test Case 0
+algorithm: bfs
+path to goal: ['down', 'right']
+number of moves: 2
+nodes expanded: 9
+
+algorithm: dfs
+path to goal: ['down', 'right']
+number of moves: 2
+nodes expanded: 939
+
+algorithm: astar
+path to goal: ['down', 'right']
+number of moves: 2
+nodes expanded: 3
+
+algorithm: ucs
+path to goal: ['down', 'right']
+number of moves: 2
+nodes expanded: 8
+
+# Test Case 1
+algorithm: bfs
+path to goal: ['right', 'down', 'left', 'up', 'left', 'down', 'right', 'right', 'down']
+number of moves: 9
+nodes expanded: 469
+
+algorithm: dfs
+no solution
+
+algorithm: astar
+path to goal: ['right', 'down', 'left', 'up', 'left', 'down', 'right', 'right', 'down']
+number of moves: 9
+nodes expanded: 177
+
+algorithm: ucs
+path to goal: ['right', 'down', 'left', 'up', 'left', 'down', 'right', 'right', 'down']
+number of moves: 9
+nodes expanded: 445
+
+# Test Case 2
+algorithm: bfs
+no solution
+
+algorithm: dfs
+no solution
+
+algorithm: astar
+no solution
+
+algorithm: ucs
+no solution
+
+# Test Case 3
+algorithm: bfs
+no solution
+
+algorithm: dfs
+no solution
+
+algorithm: astar
+no solution
+
+algorithm: ucs
+no solution
+
+# Test Case 4
+algorithm: bfs
+no solution
+
+algorithm: dfs
+no solution
+
+algorithm: astar
+no solution
+
+algorithm: ucs
+no solution
+
+# Test Case 5
+algorithm: bfs
+path to goal: ['up', 'right', 'down', 'right', 'up', 'left', 'left', 'down', 'right', 'right', 'up', 'left', 'down', 'down', 'right', 'up', 'left', 'down', 'left', 'up', 'right', 'up', 'left', 'down']
+number of moves: 24
+nodes expanded: 128605
+
+algorithm: dfs
+no solution
+
+algorithm: astar
+path to goal: ['down', 'right', 'right', 'up', 'left', 'down', 'left', 'up', 'right', 'right', 'down', 'left', 'up', 'right', 'up', 'left', 'left', 'down', 'right', 'right', 'down', 'left', 'left', 'up']
+number of moves: 24
+nodes expanded: 107279
+
+algorithm: ucs
+path to goal: ['up', 'right', 'down', 'right', 'up', 'left', 'left', 'down', 'right', 'right', 'up', 'left', 'down', 'down', 'right', 'up', 'left', 'down', 'left', 'up', 'right', 'up', 'left', 'down']
+number of moves: 24
+nodes expanded: 137701
+
+# Test Case 6
+algorithm: bfs
+no solution
+
+algorithm: dfs
+no solution
+
+algorithm: astar
+no solution
+
+algorithm: ucs
+no solution
+
+# Test Case 7
+algorithm: bfs
+no solution
+
+algorithm: dfs
+no solution
+
+algorithm: astar
+no solution
+
+algorithm: ucs
+no solution
+
+# Test Case 8
+algorithm: bfs
+path to goal: ['left', 'down', 'left', 'up', 'right', 'down', 'left', 'down', 'right', 'right', 'up', 'up', 'left', 'down', 'left', 'down', 'right', 'up', 'up']
+number of moves: 19
+nodes expanded: 34473
+
+algorithm: dfs
+no solution
+
+algorithm: astar
+path to goal: ['left', 'left', 'down', 'right', 'up', 'left', 'down', 'down', 'right', 'right', 'up', 'left', 'left', 'down', 'right', 'up', 'right', 'up', 'left']
+number of moves: 19
+nodes expanded: 39103
+
+algorithm: ucs
+path to goal: ['left', 'left', 'down', 'right', 'up', 'left', 'down', 'down', 'right', 'right', 'up', 'left', 'left', 'down', 'right', 'up', 'right', 'up', 'left']
+number of moves: 19
+nodes expanded: 29725
+
+# Test Case 9
+algorithm: bfs
+path to goal: ['down', 'right', 'up', 'left', 'down', 'down', 'right', 'up', 'up', 'left', 'left', 'down', 'right', 'right', 'down']
+number of moves: 15
+nodes expanded: 6393
+
+algorithm: dfs
+path to goal: ['down', 'right', 'up', 'left', 'down', 'down', 'right', 'up', 'up', 'left', 'left', 'down', 'right', 'right', 'down']
+number of moves: 15
+nodes expanded: 1615
+
+algorithm: astar
+path to goal: ['down', 'right', 'up', 'left', 'down', 'down', 'right', 'up', 'up', 'left', 'left', 'down', 'right', 'right', 'down']
+number of moves: 15
+nodes expanded: 33301
+
+algorithm: ucs
+path to goal: ['down', 'right', 'up', 'left', 'down', 'down', 'right', 'up', 'up', 'left', 'left', 'down', 'right', 'right', 'down']
+number of moves: 15
+nodes expanded: 7597
+
+# Test Case 10
+algorithm: bfs
+path to goal: ['down', 'right', 'down', 'left', 'up', 'right', 'up', 'left', 'left', 'down', 'down', 'right', 'right', 'up', 'left', 'up', 'left', 'down', 'right', 'down', 'left']
+number of moves: 21
+nodes expanded: 68958
+
+algorithm: dfs
+no solution
+
+algorithm: astar
+path to goal: ['down', 'right', 'down', 'left', 'up', 'right', 'up', 'left', 'left', 'down', 'down', 'right', 'right', 'up', 'left', 'up', 'left', 'down', 'right', 'down', 'left']
+number of moves: 21
+nodes expanded: 65498
+
+algorithm: ucs
+path to goal: ['down', 'right', 'down', 'left', 'up', 'right', 'up', 'left', 'left', 'down', 'down', 'right', 'right', 'up', 'left', 'up', 'left', 'down', 'right', 'down', 'left']
+number of moves: 21
+nodes expanded: 74968
+
